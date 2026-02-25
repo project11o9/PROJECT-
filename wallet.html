@@ -66,6 +66,39 @@ body{
     border-radius:10px;
     border:1px solid #e5e7eb;
 }
+/* =========================
+   BOTTOM NAVIGATION
+========================= */
+
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:100%;
+    max-width:400px;
+    height:65px;
+    background:#fff;
+    border-top:1px solid #e5e7eb;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    box-shadow:0 -4px 12px rgba(0,0,0,.05);
+}
+
+.nav-btn{
+    text-decoration:none;
+    color:#6b7280;
+    font-size:13px;
+    font-weight:600;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.nav-btn.active{
+    color:#16a34a;
+}
 
 /* HISTORY */
 .tx{
@@ -86,6 +119,20 @@ body{
 .balance-glow{animation:balanceGlow .9s ease;}
 </style>
 </head>
+<!-- ===== BOTTOM NAV ===== -->
+<div class="bottom-nav">
+
+<a href="dashboard.html" class="nav-btn">
+🏠
+<span>Home</span>
+</a>
+
+<a href="wallet.html" class="nav-btn active">
+💰
+<span>Wallet</span>
+</a>
+
+</div>
 
 <body>
 
