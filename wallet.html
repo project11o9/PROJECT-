@@ -289,7 +289,9 @@ function renderHistory(){
    </div>
 
    <div class="${
-     tx.type==="Deposit"||tx.type==="Commission"
+     tx.type==="Deposit" ||
+     tx.type==="Commission" ||
+     tx.type==="Spin Reward"
       ?"credit":"debit"
    }">
      ${tx.type==="Withdraw"?"-":"+"}${formatINR(tx.amount)}
