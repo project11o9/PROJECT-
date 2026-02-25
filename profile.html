@@ -3,10 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="Educational trading dashboard UI demo project for learning web development. Not a real trading platform.">
-<title>Trading Dashboard Demo | Profile</title>
-
-<link rel="stylesheet" href="css/auth.css">
+<title>Fidelity | Profile</title>
 
 <style>
 body{
@@ -21,126 +18,131 @@ body{
     width:100%;
     max-width:400px;
     min-height:100vh;
-    background:#f4f6f5;
     display:flex;
     flex-direction:column;
 }
 
-/* HEADER */
+/* ===== PREMIUM HEADER ===== */
 .header{
-    background:none;
-    padding:18px;
+    background:linear-gradient(135deg,#16a34a,#065f46);
+    color:white;
+    padding:30px 20px;
+    border-bottom-left-radius:28px;
+    border-bottom-right-radius:28px;
     text-align:center;
-}
-
-.logo{
-    color:#16a34a;
-    font-weight:800;
-    font-size:22px;
-}
-
-/* PROFILE CARD */
-.profile-card{
-    background:#fff;
-    margin:20px;
-    border-radius:18px;
-    padding:25px;
-    text-align:center;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 
 .avatar{
     width:80px;
     height:80px;
     border-radius:50%;
-    background:#16a34a;
-    color:#fff;
+    background:white;
+    color:#16a34a;
     display:flex;
     align-items:center;
     justify-content:center;
     font-size:32px;
-    font-weight:700;
+    font-weight:800;
     margin:auto;
 }
 
-.name{margin-top:15px;font-size:20px;font-weight:700;}
-.email{color:#6b7280;font-size:13px;}
-
-.stats{
-    background:#fff;
-    margin:0 20px;
-    border-radius:18px;
-    padding:20px;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
+.name{
+    margin-top:12px;
+    font-size:20px;
+    font-weight:700;
 }
 
-.stat{
-    display:flex;
-    justify-content:space-between;
-    margin:12px 0;
-    font-weight:600;
+.email{
+    font-size:13px;
+    opacity:.9;
 }
 
-.settings-card{
+.verified{
+    margin-top:8px;
+    font-size:12px;
+    background:rgba(255,255,255,.2);
+    padding:6px 12px;
+    border-radius:20px;
+    display:inline-block;
+}
+
+/* ===== WALLET CARD ===== */
+.wallet-card{
     background:#fff;
-    margin:20px;
+    margin:-35px 20px 20px;
+    border-radius:20px;
+    padding:22px;
+    box-shadow:0 15px 35px rgba(0,0,0,.12);
+    text-align:center;
+}
+
+.wallet-title{
+    font-size:13px;
+    color:#6b7280;
+}
+
+.wallet-balance{
+    font-size:30px;
+    font-weight:800;
+    margin-top:6px;
+    color:#16a34a;
+}
+
+/* ===== CARD ===== */
+.card{
+    background:#fff;
+    margin:15px 20px;
     border-radius:18px;
     padding:20px;
     box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 
 .section-title{
-    font-size:17px;
+    font-size:16px;
     font-weight:700;
     margin-bottom:15px;
 }
 
-.detail-row{
+.row{
     display:flex;
     justify-content:space-between;
     margin:10px 0;
     font-size:14px;
 }
 
+/* INPUT */
 .input{
     width:100%;
-    padding:6px;
-    margin:8px 0;
+    padding:10px;
     border-radius:10px;
     border:1px solid #e5e7eb;
+    margin-top:8px;
 }
 
 .save-btn{
     width:100%;
+    margin-top:12px;
     padding:12px;
     border:none;
-    border-radius:8px;
+    border-radius:12px;
     background:#16a34a;
-    color:#fff;
+    color:white;
     font-weight:700;
     cursor:pointer;
 }
 
-.saved-text{
-    font-size:13px;
-    color:#16a34a;
-    margin-top:8px;
-}
-
-.help-title{font-weight:700;margin-top:12px;}
-.help-text{font-size:13px;color:#6b7280;}
-
+/* LOGOUT */
 .logout{
-    margin:25px 20px;
+    margin:20px;
     padding:14px;
     border:none;
     border-radius:14px;
     background:#ef4444;
-    color:#fff;
+    color:white;
     font-weight:700;
-    cursor:pointer;
 }
 
+/* NAV */
 .bottom-nav{
     margin-top:auto;
     height:70px;
@@ -148,13 +150,16 @@ body{
     border-top:1px solid #eee;
     display:flex;
 }
-
 .nav-item{
     flex:1;
     text-align:center;
     padding-top:10px;
     text-decoration:none;
     color:#6b7280;
+}
+.nav-item.active{
+    color:#16a34a;
+    font-weight:700;
 }
 </style>
 </head>
@@ -163,75 +168,101 @@ body{
 
 <div class="container">
 
-<header class="header">
-<div class="logo">Trading Dashboard Demo</div>
-</header>
-
-<div class="profile-card">
+<!-- HEADER -->
+<div class="header">
 <div id="avatar" class="avatar">U</div>
 <div id="username" class="name">User</div>
-<div id="useremail" class="email">user@email.com</div>
+<div id="useremail" class="email">email@email.com</div>
+<div class="verified">✔ KYC Verified</div>
 </div>
 
-<div class="stats">
-<div class="stat"><span>Wallet Balance</span><span id="wallet">$0.00</span></div>
-<div class="stat"><span>Total Reviews</span><span>24</span></div>
-<div class="stat"><span>Account Status</span><span style="color:#16a34a;">Active</span></div>
+<!-- WALLET -->
+<div class="wallet-card">
+<div class="wallet-title">Available Balance</div>
+<div id="wallet" class="wallet-balance">₹0.00</div>
 </div>
 
-<div class="settings-card">
-<div class="section-title">Account Details</div>
-<div class="detail-row"><span>Full Name</span><span id="fullName">Not Added</span></div>
-<div class="detail-row"><span>DOB</span><span id="dob">Not Added</span></div>
-<div class="detail-row"><span>Phone</span><span id="phone">Not Added</span></div>
-<div class="detail-row"><span>Gmail</span><span id="gmail">Not Added</span></div>
+<!-- ACCOUNT DETAILS -->
+<div class="card">
+<div class="section-title">Account Information</div>
+<div class="row"><span>Full Name</span><span id="fullName"></span></div>
+<div class="row"><span>Phone</span><span id="phone"></span></div>
+<div class="row"><span>Email</span><span id="gmail"></span></div>
 </div>
 
-<div class="settings-card">
-<div class="section-title">Demo Notes</div>
+<!-- BANK DETAILS -->
+<div class="card">
+<div class="section-title">Bank Details</div>
 
-<p class="help-text">No banking details are collected in this demo app.</p>
+<input id="bankName" class="input" placeholder="Bank Name">
+<input id="accountNumber" class="input" placeholder="Account Number">
+<input id="ifsc" class="input" placeholder="IFSC Code">
+
+<button class="save-btn" onclick="saveBank()">Save Bank Details</button>
 </div>
 
-<div class="settings-card">
-<div class="section-title">Demo Safety</div>
-<p class="help-text">No real payments, transfers, or investments are available.</p>
+<!-- UPI DETAILS -->
+<div class="card">
+<div class="section-title">UPI Details</div>
+
+<input id="upiId" class="input" placeholder="example@upi">
+
+<button class="save-btn" onclick="saveUPI()">Save UPI ID</button>
 </div>
 
-<button id="logoutBtn" class="logout">Logout</button>
+<button class="logout" onclick="logout()">Logout</button>
 
 <nav class="bottom-nav">
 <a href="dashboard.html" class="nav-item">🏠 Home</a>
-<a href="profile.html" class="nav-item">👤 Profile</a>
+<a href="wallet.html" class="nav-item">💰 Wallet</a>
+<a href="profile.html" class="nav-item active">👤 Profile</a>
 </nav>
 
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-    const isAuthed = localStorage.getItem("demoAuthenticated") === "true";
-    if(!isAuthed){
-        window.location.replace("index.html");
-        return;
-    }
 
-    const name = localStorage.getItem("demoDisplayName") || "Demo User";
-    const demoEmail = "admin@demo.com";
-    const wallet = localStorage.getItem("demoWallet") || "0.00";
+/* INR FORMAT */
+function formatINR(v){
+ return "₹"+Number(v).toLocaleString("en-IN",{minimumFractionDigits:2});
+}
 
-    document.getElementById("username").textContent = name;
-    document.getElementById("useremail").textContent = demoEmail;
-    document.getElementById("wallet").textContent = "$" + Number(wallet).toFixed(2);
-    document.getElementById("avatar").textContent = name.charAt(0).toUpperCase();
+/* LOAD USER */
+const name=localStorage.getItem("userName")||"User";
+const email=localStorage.getItem("userEmail")||"Not Provided";
+const phone=localStorage.getItem("userPhone")||"Not Added";
+const wallet=localStorage.getItem("wallet")||0;
 
-    document.getElementById("fullName").textContent = "Demo User";
-    document.getElementById("dob").textContent = "Not Collected";
-    document.getElementById("phone").textContent = "Not Collected";
-    document.getElementById("gmail").textContent = demoEmail;
-});
+document.getElementById("username").textContent=name;
+document.getElementById("useremail").textContent=email;
+document.getElementById("avatar").textContent=name.charAt(0).toUpperCase();
+document.getElementById("wallet").textContent=formatINR(wallet);
+
+document.getElementById("fullName").textContent=name;
+document.getElementById("gmail").textContent=email;
+document.getElementById("phone").textContent=phone;
+
+/* SAVE BANK */
+function saveBank(){
+ localStorage.setItem("bankName",bankName.value);
+ localStorage.setItem("accountNumber",accountNumber.value);
+ localStorage.setItem("ifsc",ifsc.value);
+ alert("✅ Bank details saved");
+}
+
+/* SAVE UPI */
+function saveUPI(){
+ localStorage.setItem("upiId",upiId.value);
+ alert("✅ UPI ID saved");
+}
+
+/* LOGOUT */
+function logout(){
+ localStorage.clear();
+ window.location.href="index.html";
+}
+
 </script>
-
-<script src="js/auth.js"></script>
 
 </body>
 </html>
