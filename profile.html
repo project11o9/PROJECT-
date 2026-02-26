@@ -7,160 +7,224 @@
 
 <style>
 body{
-    margin:0;
-    font-family:Poppins,sans-serif;
-    background:#f4f6f5;
-    display:flex;
-    justify-content:center;
+margin:0;
+font-family:Poppins,sans-serif;
+background:#f4f6f5;
+display:flex;
+justify-content:center;
 }
 
 .container{
-    width:100%;
-    max-width:400px;
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
+width:100%;
+max-width:400px;
+min-height:100vh;
+display:flex;
+flex-direction:column;
 }
 
-/* ===== PREMIUM HEADER ===== */
+/* ===== HEADER ===== */
 .header{
-    background:linear-gradient(135deg,#16a34a,#065f46);
-    color:white;
-    padding:30px 20px;
-    border-bottom-left-radius:28px;
-    border-bottom-right-radius:28px;
-    text-align:center;
+background:linear-gradient(135deg,#16a34a,#065f46);
+color:#fff;
+padding:30px 20px;
+border-bottom-left-radius:28px;
+border-bottom-right-radius:28px;
+text-align:center;
 }
 
 .avatar{
-    width:80px;
-    height:80px;
-    border-radius:50%;
-    background:white;
-    color:#16a34a;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:32px;
-    font-weight:800;
-    margin:auto;
+width:82px;height:82px;border-radius:50%;
+background:#fff;color:#16a34a;
+display:flex;align-items:center;justify-content:center;
+font-size:34px;font-weight:800;margin:auto;
 }
 
-.name{
-    margin-top:12px;
-    font-size:20px;
-    font-weight:700;
-}
-
-.email{
-    font-size:13px;
-    opacity:.9;
-}
+.name{margin-top:12px;font-size:20px;font-weight:700;}
+.email{font-size:13px;opacity:.9;}
 
 .verified{
-    margin-top:8px;
-    font-size:12px;
-    background:rgba(255,255,255,.2);
-    padding:6px 12px;
-    border-radius:20px;
-    display:inline-block;
+margin-top:8px;
+font-size:12px;
+background:rgba(255,255,255,.2);
+padding:6px 14px;
+border-radius:20px;
+display:inline-block;
 }
 
-/* ===== WALLET CARD ===== */
+/* ===== WALLET ===== */
 .wallet-card{
-    background:#fff;
-    margin:-35px 20px 20px;
-    border-radius:20px;
-    padding:22px;
-    box-shadow:0 15px 35px rgba(0,0,0,.12);
-    text-align:center;
-}
-
-.wallet-title{
-    font-size:13px;
-    color:#6b7280;
+background:#fff;
+margin:-35px 20px 20px;
+border-radius:22px;
+padding:22px;
+text-align:center;
+box-shadow:0 20px 40px rgba(0,0,0,.12);
 }
 
 .wallet-balance{
-    font-size:30px;
-    font-weight:800;
-    margin-top:6px;
-    color:#16a34a;
+font-size:30px;
+font-weight:800;
+margin-top:6px;
+color:#16a34a;
 }
 
-/* ===== CARD ===== */
+/* ===== ACCOUNT CARD ===== */
 .card{
-    background:#fff;
-    margin:15px 20px;
-    border-radius:18px;
-    padding:20px;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
+background:#fff;
+margin:15px 20px;
+border-radius:18px;
+padding:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 
 .section-title{
-    font-size:16px;
-    font-weight:700;
-    margin-bottom:15px;
+font-size:16px;
+font-weight:700;
+margin-bottom:15px;
 }
 
 .row{
-    display:flex;
-    justify-content:space-between;
-    margin:10px 0;
-    font-size:14px;
+display:flex;
+justify-content:space-between;
+margin:10px 0;
+font-size:14px;
 }
 
-/* INPUT */
+/* ===== SLIDER ===== */
+.app-info-wrapper{
+margin:10px 0 20px;
+padding-left:20px;
+}
+
+.app-info-track{
+display:flex;
+gap:14px;
+overflow-x:auto;
+scroll-snap-type:x mandatory;
+-webkit-overflow-scrolling:touch;
+}
+.app-info-track::-webkit-scrollbar{display:none;}
+
+.app-info-card{
+flex:0 0 calc((100% - 56px)/3);
+background:#fff;
+border-radius:18px;
+padding:18px 10px;
+text-align:center;
+cursor:pointer;
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.app-info-icon{font-size:26px;}
+.app-info-card span{
+display:block;font-size:12px;margin-top:8px;font-weight:600;
+}
+
+/* ===== SMART TIP CARD ===== */
+.smart-tip-card{
+margin:0 20px 20px;
+padding:18px;
+border-radius:18px;
+display:flex;
+gap:14px;
+align-items:center;
+background:linear-gradient(135deg,#ecfdf5,#ffffff);
+border:1px solid rgba(22,163,74,.15);
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+animation:tipFloat 4s ease-in-out infinite;
+}
+
+@keyframes tipFloat{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-4px);}
+}
+
+.tip-icon{
+font-size:26px;
+background:#16a34a;
+color:#fff;
+width:44px;height:44px;
+border-radius:12px;
+display:flex;align-items:center;justify-content:center;
+}
+
+.tip-title{font-weight:700;font-size:14px;color:#065f46;}
+
+.tip-text{
+font-size:13px;
+margin-top:3px;
+color:#374151;
+opacity:0;
+transition:.4s;
+}
+.tip-text.show{opacity:1;}
+
+/* ===== BOTTOM SHEET ===== */
+.app-sheet{
+position:fixed;
+left:0;right:0;
+bottom:-100%;
+background:#fff;
+border-radius:24px 24px 0 0;
+padding:22px;
+box-shadow:0 -15px 40px rgba(0,0,0,.25);
+transition:.4s;
+max-width:400px;margin:auto;
+z-index:999;
+}
+.app-sheet.show{bottom:0;}
+
+.sheet-content{
+margin-top:12px;
+font-size:14px;
+line-height:1.6;
+max-height:55vh;
+overflow:auto;
+}
+
 .input{
-    width:100%;
-    padding:10px;
-    border-radius:10px;
-    border:1px solid #e5e7eb;
-    margin-top:8px;
+width:100%;
+padding:10px;
+margin-top:10px;
+border-radius:10px;
+border:1px solid #e5e7eb;
 }
 
 .save-btn{
-    width:100%;
-    margin-top:12px;
-    padding:12px;
-    border:none;
-    border-radius:12px;
-    background:#16a34a;
-    color:white;
-    font-weight:700;
-    cursor:pointer;
+margin-top:12px;
+width:100%;
+padding:12px;
+border:none;
+background:#16a34a;
+color:#fff;
+border-radius:12px;
+font-weight:700;
 }
 
-/* LOGOUT */
-.logout{
-    margin:20px;
-    padding:14px;
-    border:none;
-    border-radius:14px;
-    background:#ef4444;
-    color:white;
-    font-weight:700;
+.sheet-close{
+margin-top:12px;
+width:100%;
+padding:12px;
+border:none;
+background:#111827;
+color:#fff;
+border-radius:12px;
 }
 
 /* NAV */
 .bottom-nav{
-    margin-top:auto;
-    height:70px;
-    background:#fff;
-    border-top:1px solid #eee;
-    display:flex;
+margin-top:auto;
+height:70px;
+background:#fff;
+border-top:1px solid #eee;
+display:flex;
 }
 .nav-item{
-    flex:1;
-    text-align:center;
-    padding-top:10px;
-    text-decoration:none;
-    color:#6b7280;
+flex:1;text-align:center;padding-top:10px;
+text-decoration:none;color:#6b7280;
 }
-.nav-item.active{
-    color:#16a34a;
-    font-weight:700;
-}
+.nav-item.active{color:#16a34a;font-weight:700;}
+
 </style>
 </head>
 
@@ -168,21 +232,18 @@ body{
 
 <div class="container">
 
-<!-- HEADER -->
 <div class="header">
 <div id="avatar" class="avatar">U</div>
-<div id="username" class="name">User</div>
-<div id="useremail" class="email">email@email.com</div>
+<div id="username" class="name"></div>
+<div id="useremail" class="email"></div>
 <div class="verified">✔ KYC Verified</div>
 </div>
 
-<!-- WALLET -->
 <div class="wallet-card">
-<div class="wallet-title">Available Balance</div>
+<div>Available Balance</div>
 <div id="wallet" class="wallet-balance">₹0.00</div>
 </div>
 
-<!-- ACCOUNT DETAILS -->
 <div class="card">
 <div class="section-title">Account Information</div>
 <div class="row"><span>Full Name</span><span id="fullName"></span></div>
@@ -190,27 +251,26 @@ body{
 <div class="row"><span>Email</span><span id="gmail"></span></div>
 </div>
 
-<!-- BANK DETAILS -->
-<div class="card">
-<div class="section-title">Bank Details</div>
-
-<input id="bankName" class="input" placeholder="Bank Name">
-<input id="accountNumber" class="input" placeholder="Account Number">
-<input id="ifsc" class="input" placeholder="IFSC Code">
-
-<button class="save-btn" onclick="saveBank()">Save Bank Details</button>
+<!-- SLIDER -->
+<div class="app-info-wrapper">
+<div class="app-info-track">
+<div class="app-info-card" data="bank"><div class="app-info-icon">🏦</div><span>Bank</span></div>
+<div class="app-info-card" data="upi"><div class="app-info-icon">📱</div><span>UPI</span></div>
+<div class="app-info-card" data="help"><div class="app-info-icon">🛟</div><span>Help</span></div>
+<div class="app-info-card" data="about"><div class="app-info-icon">ℹ️</div><span>About</span></div>
+<div class="app-info-card" data="rules"><div class="app-info-icon">📜</div><span>Rules</span></div>
+<div class="app-info-card" data="terms"><div class="app-info-icon">✅</div><span>Terms</span></div>
+</div>
 </div>
 
-<!-- UPI DETAILS -->
-<div class="card">
-<div class="section-title">UPI Details</div>
-
-<input id="upiId" class="input" placeholder="example@upi">
-
-<button class="save-btn" onclick="saveUPI()">Save UPI ID</button>
+<!-- SMART TIP -->
+<div class="smart-tip-card">
+<div class="tip-icon">💡</div>
+<div>
+<div class="tip-title">Smart Tip</div>
+<div id="smartTipText" class="tip-text">Loading tips...</div>
 </div>
-
-<button class="logout" onclick="logout()">Logout</button>
+</div>
 
 <nav class="bottom-nav">
 <a href="dashboard.html" class="nav-item">🏠 Home</a>
@@ -220,46 +280,104 @@ body{
 
 </div>
 
+<!-- SHEET -->
+<div id="sheet" class="app-sheet">
+<h3 id="sheetTitle"></h3>
+<div id="sheetContent" class="sheet-content"></div>
+<button class="sheet-close" onclick="sheet.classList.remove('show')">Close</button>
+</div>
+
 <script>
 
-/* INR FORMAT */
+/* USER LOAD */
 function formatINR(v){
- return "₹"+Number(v).toLocaleString("en-IN",{minimumFractionDigits:2});
+return "₹"+Number(v).toLocaleString("en-IN",{minimumFractionDigits:2});
 }
 
-/* LOAD USER */
-const name=localStorage.getItem("userName")||"User";
-const email=localStorage.getItem("userEmail")||"Not Provided";
-const phone=localStorage.getItem("userPhone")||"Not Added";
-const wallet=localStorage.getItem("wallet")||0;
+username.textContent=localStorage.userName||"User";
+useremail.textContent=localStorage.userEmail||"Not Provided";
+avatar.textContent=username.textContent.charAt(0);
+wallet.innerText=formatINR(localStorage.wallet||0);
+fullName.textContent=username.textContent;
+gmail.textContent=useremail.textContent;
+phone.textContent=localStorage.userPhone||"Not Added";
 
-document.getElementById("username").textContent=name;
-document.getElementById("useremail").textContent=email;
-document.getElementById("avatar").textContent=name.charAt(0).toUpperCase();
-document.getElementById("wallet").textContent=formatINR(wallet);
+/* ===== SMART TIP ENGINE ===== */
 
-document.getElementById("fullName").textContent=name;
-document.getElementById("gmail").textContent=email;
-document.getElementById("phone").textContent=phone;
+const tipText=document.getElementById("smartTipText");
 
-/* SAVE BANK */
+const walletAmount=Number(localStorage.wallet)||0;
+const bankAdded=localStorage.bankName;
+const upiAdded=localStorage.upiId;
+
+let tips=[];
+
+if(!bankAdded) tips.push("🏦 Add your bank details to enable withdrawals.");
+if(!upiAdded) tips.push("📱 Link your UPI ID for faster payouts.");
+if(walletAmount===0) tips.push("🚀 Start reviewing stocks to begin earning rewards.");
+if(walletAmount>3000) tips.push("💰 You're eligible for withdrawal. Secure your earnings.");
+
+tips.push("⭐ Active users receive higher bonus rewards.");
+tips.push("🔥 Daily activity increases earning probability.");
+
+let index=0;
+
+function rotateTip(){
+tipText.classList.remove("show");
+setTimeout(()=>{
+tipText.innerText=tips[index];
+tipText.classList.add("show");
+index=(index+1)%tips.length;
+},250);
+}
+
+rotateTip();
+setInterval(rotateTip,5000);
+
+/* ===== ICON ACTIONS ===== */
+document.querySelectorAll(".app-info-card").forEach(card=>{
+card.onclick=()=>{
+const type=card.dataset;
+
+if(type==="bank"){
+sheetTitle.innerText="Bank Details";
+sheetContent.innerHTML=`
+<input class="input" id="bankName" placeholder="Bank Name">
+<input class="input" id="acc" placeholder="Account Number">
+<input class="input" id="ifsc" placeholder="IFSC Code">
+<button class="save-btn" onclick="saveBank()">Save Bank</button>`;
+}
+else if(type==="upi"){
+sheetTitle.innerText="UPI Details";
+sheetContent.innerHTML=`
+<input class="input" id="upi" placeholder="example@upi">
+<button class="save-btn" onclick="saveUPI()">Save UPI</button>`;
+}
+else{
+const info={
+help:`Our support team helps with account access, wallet issues and payouts.`,
+about:`Fidelity is a premium fintech dashboard providing wallet and reward management.`,
+rules:`Users must follow platform policies to maintain account access.`,
+terms:`All wallet balances operate within platform ecosystem rules.`
+};
+sheetTitle.innerText=type.toUpperCase();
+sheetContent.innerText=info[type];
+}
+
+sheet.classList.add("show");
+};
+});
+
 function saveBank(){
- localStorage.setItem("bankName",bankName.value);
- localStorage.setItem("accountNumber",accountNumber.value);
- localStorage.setItem("ifsc",ifsc.value);
- alert("✅ Bank details saved");
+localStorage.bankName=bankName.value;
+localStorage.accountNumber=acc.value;
+localStorage.ifsc=ifsc.value;
+alert("✅ Bank Saved");
 }
 
-/* SAVE UPI */
 function saveUPI(){
- localStorage.setItem("upiId",upiId.value);
- alert("✅ UPI ID saved");
-}
-
-/* LOGOUT */
-function logout(){
- localStorage.clear();
- window.location.href="index.html";
+localStorage.upiId=upi.value;
+alert("✅ UPI Saved");
 }
 
 </script>
