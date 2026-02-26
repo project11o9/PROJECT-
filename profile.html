@@ -289,6 +289,128 @@ text-decoration:none;color:#6b7280;
 
 <script>
 
+/* ===== ICON ACTIONS (REAL INPUT SYSTEM) ===== */
+
+document.querySelectorAll(".app-info-card").forEach(card=>{
+card.onclick=()=>{
+
+const type = card.dataset;
+
+/* ---------- BANK ---------- */
+if(type==="bank"){
+
+sheetTitle.innerText="🏦 Bank Details";
+
+sheetContent.innerHTML=`
+<p style="margin-bottom:10px;color:#6b7280">
+Add your bank account to enable secure withdrawals.
+</p>
+
+<input class="input" id="bankName"
+placeholder="Bank Name"
+value="${localStorage.bankName || ""}">
+
+<input class="input" id="accountNumber"
+placeholder="Account Number"
+value="${localStorage.accountNumber || ""}">
+
+<input class="input" id="ifsc"
+placeholder="IFSC Code"
+value="${localStorage.ifsc || ""}">
+
+<button class="save-btn" onclick="saveBankDetails()">
+Save Bank Details
+</button>
+`;
+
+}
+
+/* ---------- UPI ---------- */
+else if(type==="upi"){
+
+sheetTitle.innerText="📱 UPI Details";
+
+sheetContent.innerHTML=`
+<p style="margin-bottom:10px;color:#6b7280">
+Link your UPI ID for instant payouts via GPay, PhonePe or Paytm.
+</p>
+
+<input class="input" id="upiId"
+placeholder="example@upi"
+value="${localStorage.upiId || ""}">
+
+<button class="save-btn" onclick="saveUPIDetails()">
+Save UPI ID
+</button>
+`;
+
+}
+
+/* ---------- OTHER INFO ---------- */
+else{
+
+const info={
+help:`Our support team assists with wallet, payouts and account issues.
+Contact us anytime at support@fidelityapp.in.`,
+about:`Fidelity is a modern fintech-style dashboard designed for
+wallet management, rewards and earning simulations.`,
+rules:`Users must follow platform policies. Suspicious activity may
+result in temporary account restriction.`,
+terms:`Wallet balances operate within platform ecosystem rules
+and are governed by system conditions.`
+};
+
+sheetTitle.innerText=card.innerText.trim();
+sheetContent.innerHTML=`<p>${info[type]}</p>`;
+}
+
+sheet.classList.add("show");
+
+};
+});
+
+
+/* ===== SAVE BANK ===== */
+function saveBankDetails(){
+
+const bank = document.getElementById("bankName").value.trim();
+const acc  = document.getElementById("accountNumber").value.trim();
+const ifsc = document.getElementById("ifsc").value.trim();
+
+if(!bank || !acc || !ifsc){
+alert("Please fill all bank details");
+return;
+}
+
+localStorage.setItem("bankName",bank);
+localStorage.setItem("accountNumber",acc);
+localStorage.setItem("ifsc",ifsc);
+
+alert("✅ Bank Details Saved Successfully");
+sheet.classList.remove("show");
+}
+
+
+/* ===== SAVE UPI ===== */
+function saveUPIDetails(){
+
+const upi = document.getElementById("upiId").value.trim();
+
+if(!upi || !upi.includes("@")){
+alert("Enter valid UPI ID");
+return;
+}
+
+localStorage.setItem("upiId",upi);
+
+alert("✅ UPI ID Saved Successfully");
+sheet.classList.remove("show");
+}
+
+</script>
+  
+<script>
+
 /* USER LOAD */
 function formatINR(v){
 return "₹"+Number(v).toLocaleString("en-IN",{minimumFractionDigits:2});
