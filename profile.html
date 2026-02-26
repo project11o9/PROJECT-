@@ -289,128 +289,6 @@ text-decoration:none;color:#6b7280;
 
 <script>
 
-/* ===== ICON ACTIONS (REAL INPUT SYSTEM) ===== */
-
-document.querySelectorAll(".app-info-card").forEach(card=>{
-card.onclick=()=>{
-
-const type = card.dataset;
-
-/* ---------- BANK ---------- */
-if(type==="bank"){
-
-sheetTitle.innerText="🏦 Bank Details";
-
-sheetContent.innerHTML=`
-<p style="margin-bottom:10px;color:#6b7280">
-Add your bank account to enable secure withdrawals.
-</p>
-
-<input class="input" id="bankName"
-placeholder="Bank Name"
-value="${localStorage.bankName || ""}">
-
-<input class="input" id="accountNumber"
-placeholder="Account Number"
-value="${localStorage.accountNumber || ""}">
-
-<input class="input" id="ifsc"
-placeholder="IFSC Code"
-value="${localStorage.ifsc || ""}">
-
-<button class="save-btn" onclick="saveBankDetails()">
-Save Bank Details
-</button>
-`;
-
-}
-
-/* ---------- UPI ---------- */
-else if(type==="upi"){
-
-sheetTitle.innerText="📱 UPI Details";
-
-sheetContent.innerHTML=`
-<p style="margin-bottom:10px;color:#6b7280">
-Link your UPI ID for instant payouts via GPay, PhonePe or Paytm.
-</p>
-
-<input class="input" id="upiId"
-placeholder="example@upi"
-value="${localStorage.upiId || ""}">
-
-<button class="save-btn" onclick="saveUPIDetails()">
-Save UPI ID
-</button>
-`;
-
-}
-
-/* ---------- OTHER INFO ---------- */
-else{
-
-const info={
-help:`Our support team assists with wallet, payouts and account issues.
-Contact us anytime at support@fidelityapp.in.`,
-about:`Fidelity is a modern fintech-style dashboard designed for
-wallet management, rewards and earning simulations.`,
-rules:`Users must follow platform policies. Suspicious activity may
-result in temporary account restriction.`,
-terms:`Wallet balances operate within platform ecosystem rules
-and are governed by system conditions.`
-};
-
-sheetTitle.innerText=card.innerText.trim();
-sheetContent.innerHTML=`<p>${info[type]}</p>`;
-}
-
-sheet.classList.add("show");
-
-};
-});
-
-
-/* ===== SAVE BANK ===== */
-function saveBankDetails(){
-
-const bank = document.getElementById("bankName").value.trim();
-const acc  = document.getElementById("accountNumber").value.trim();
-const ifsc = document.getElementById("ifsc").value.trim();
-
-if(!bank || !acc || !ifsc){
-alert("Please fill all bank details");
-return;
-}
-
-localStorage.setItem("bankName",bank);
-localStorage.setItem("accountNumber",acc);
-localStorage.setItem("ifsc",ifsc);
-
-alert("✅ Bank Details Saved Successfully");
-sheet.classList.remove("show");
-}
-
-
-/* ===== SAVE UPI ===== */
-function saveUPIDetails(){
-
-const upi = document.getElementById("upiId").value.trim();
-
-if(!upi || !upi.includes("@")){
-alert("Enter valid UPI ID");
-return;
-}
-
-localStorage.setItem("upiId",upi);
-
-alert("✅ UPI ID Saved Successfully");
-sheet.classList.remove("show");
-}
-
-</script>
-  
-<script>
-
 /* USER LOAD */
 function formatINR(v){
 return "₹"+Number(v).toLocaleString("en-IN",{minimumFractionDigits:2});
@@ -437,7 +315,7 @@ let tips=[];
 if(!bankAdded) tips.push("🏦 Add your bank details to enable withdrawals.");
 if(!upiAdded) tips.push("📱 Link your UPI ID for faster payouts.");
 if(walletAmount===0) tips.push("🚀 Start reviewing stocks to begin earning rewards.");
-if(walletAmount>3000) tips.push("💰 You're eligible for withdrawal. Secure your earnings.");
+if(walletAmount>3000) tips.push("💰 You're eligible for withdrawal.");
 
 tips.push("⭐ Active users receive higher bonus rewards.");
 tips.push("🔥 Daily activity increases earning probability.");
@@ -456,25 +334,30 @@ index=(index+1)%tips.length;
 rotateTip();
 setInterval(rotateTip,5000);
 
-/* ===== ICON ACTIONS ===== */
+
+/* ===== ICON ACTIONS (FIXED) ===== */
+
 document.querySelectorAll(".app-info-card").forEach(card=>{
 card.onclick=()=>{
+
 const type=card.dataset;
 
 if(type==="bank"){
-sheetTitle.innerText="Bank Details";
+sheetTitle.innerText="🏦 Bank Details";
 sheetContent.innerHTML=`
-<input class="input" id="bankName" placeholder="Bank Name">
-<input class="input" id="acc" placeholder="Account Number">
-<input class="input" id="ifsc" placeholder="IFSC Code">
-<button class="save-btn" onclick="saveBank()">Save Bank</button>`;
+<input class="input" id="bankName" placeholder="Bank Name" value="${localStorage.bankName||""}">
+<input class="input" id="accountNumber" placeholder="Account Number" value="${localStorage.accountNumber||""}">
+<input class="input" id="ifsc" placeholder="IFSC Code" value="${localStorage.ifsc||""}">
+<button class="save-btn" onclick="saveBank()">Save Bank Details</button>`;
 }
+
 else if(type==="upi"){
-sheetTitle.innerText="UPI Details";
+sheetTitle.innerText="📱 UPI Details";
 sheetContent.innerHTML=`
-<input class="input" id="upi" placeholder="example@upi">
-<button class="save-btn" onclick="saveUPI()">Save UPI</button>`;
+<input class="input" id="upiId" placeholder="example@upi" value="${localStorage.upiId||""}">
+<button class="save-btn" onclick="saveUPI()">Save UPI ID</button>`;
 }
+
 else{
 const info={
 help:`Our support team helps with account access, wallet issues and payouts.`,
@@ -482,24 +365,38 @@ about:`Fidelity is a premium fintech dashboard providing wallet and reward manag
 rules:`Users must follow platform policies to maintain account access.`,
 terms:`All wallet balances operate within platform ecosystem rules.`
 };
+
 sheetTitle.innerText=type.toUpperCase();
-sheetContent.innerText=info[type];
+sheetContent.innerHTML=`<p>${info[type]}</p>`;
 }
 
 sheet.classList.add("show");
 };
 });
 
+
+/* ===== SAVE FUNCTIONS (FIXED) ===== */
+
 function saveBank(){
-localStorage.bankName=bankName.value;
-localStorage.accountNumber=acc.value;
-localStorage.ifsc=ifsc.value;
-alert("✅ Bank Saved");
+const bank=document.getElementById("bankName").value;
+const acc=document.getElementById("accountNumber").value;
+const ifsc=document.getElementById("ifsc").value;
+
+localStorage.setItem("bankName",bank);
+localStorage.setItem("accountNumber",acc);
+localStorage.setItem("ifsc",ifsc);
+
+alert("✅ Bank Details Saved");
+sheet.classList.remove("show");
 }
 
 function saveUPI(){
-localStorage.upiId=upi.value;
-alert("✅ UPI Saved");
+const upi=document.getElementById("upiId").value;
+
+localStorage.setItem("upiId",upi);
+
+alert("✅ UPI ID Saved");
+sheet.classList.remove("show");
 }
 
 </script>
